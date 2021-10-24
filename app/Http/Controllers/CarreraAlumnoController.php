@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use DB;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class CarreraAlumnoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,6 @@ class StudentController extends Controller
     public function index()
     {
         //
-        $student = Student::all();
-        return \response($student);
     }
 
     /**
@@ -39,8 +37,17 @@ class StudentController extends Controller
     public function show($id)
     {
         //
-        $student = Student::where('id', '=', $id)->first();
-        return response($student);
+        $curso_alumno = DB::table('registered_careers')
+            ->select([
+                'careers.id as id_carrera', 'careers.nombre', 'registered_careers.fecha_inscripcion',
+                DB::raw('CONCAT(students.nombre," ",students.apellido) as alumno')
+            ])
+            ->join('careers', 'registered_careers.id_carrera', '=', 'careers.id')
+            ->join('students', 'registered_careers.id_alumno', '=', 'students.id')
+            ->where('students.id', '=', $id)
+            ->get();
+
+        return response($curso_alumno);
     }
 
     /**

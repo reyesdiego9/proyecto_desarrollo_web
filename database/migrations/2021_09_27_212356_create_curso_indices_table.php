@@ -22,6 +22,7 @@ class CreateCursoIndicesTable extends Migration
             $table->unsignedBigInteger('segundo_parcial')->nullable();
             $table->unsignedBigInteger('zona')->nullable();
             $table->unsignedBigInteger('examen_final')->nullable();
+            $table->unsignedBigInteger('year')->nullable();
             $table->unsignedBigInteger('nota_final')->nullable();
 
             $table->foreign('id_curso')

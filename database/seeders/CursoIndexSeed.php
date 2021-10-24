@@ -37,6 +37,7 @@ class CursoIndexSeed extends Seeder
                     $indice->segundo_parcial = $nota2;
                     $indice->zona = $zona;
                     $indice->examen_final = $final;
+                    $indice->year = 2018;
                     $indice->nota_final = ($nota1 + $nota2 + $zona + $final);
                     $indice->save();
                 }

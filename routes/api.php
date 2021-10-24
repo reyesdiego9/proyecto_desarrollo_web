@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdministradorController;
+use App\Http\Controllers\CarreraAlumnoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CourseStateController;
+use App\Http\Controllers\CursoController;
+use App\Http\Controllers\NotaController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
@@ -29,3 +32,7 @@ Route::apiResource('estado_alumno', CourseStateController::class);
 Route::apiResource('roles', RolController::class);
 Route::apiResource('administrador', AdministradorController::class);
 Route::apiResource('estudiante', StudentController::class);
+Route::apiResource('administrador', AdministradorController::class);
+Route::apiResource('asignatura/estudiante', CursoController::class);
+Route::apiResource('nota', NotaController::class);
+Route::apiResource('carrera/alumno', CarreraAlumnoController::class);

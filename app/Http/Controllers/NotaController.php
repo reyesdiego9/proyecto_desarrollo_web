@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
+use DB;
+use App\Models\CursoIndex;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class NotaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,6 @@ class StudentController extends Controller
     public function index()
     {
         //
-        $student = Student::all();
-        return \response($student);
     }
 
     /**
@@ -39,8 +38,9 @@ class StudentController extends Controller
     public function show($id)
     {
         //
-        $student = Student::where('id', '=', $id)->first();
-        return response($student);
+        $nota = CursoIndex::all()->where('id', '=', $id)->first();
+
+        return \response($nota);
     }
 
     /**
@@ -50,9 +50,23 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
         //
+        $primer_parcial = $request->input('primer_parcial');
+        $segundo_parcial = $request->input('segundo_parcial');
+        $zona = $request->input('zona');
+        $examen_final = $request->input('examen_final');
+        $nota_final = $request->input('nota_final');
+
+        DB::update(
+            'update curso_indices set 
+            primer_parcial=? , segundo_parcial=?, zona=?, examen_final=?, nota_final=? where id = ?',
+            [$primer_parcial, $segundo_parcial, $zona, $examen_final, $nota_final, $id]
+        );
+        DB::select('call  UPDATE_ESTADO_NOTA(?)', array($id));
+
+        return response()->json("sucess");
     }
 
     /**

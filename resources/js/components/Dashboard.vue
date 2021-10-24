@@ -26,7 +26,7 @@
                 >Administrador</router-link
               >
             </li>
-            <li class="nav-item" v-if="isAnAdmin == 1">
+            <li class="nav-item">
               <router-link to="/estudiante" class="nav-link active"
                 >Estudiante</router-link
               >

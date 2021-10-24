@@ -4,6 +4,8 @@ import Login from "../components/Login";
 // import Dashboard from "../components/Dashboard";
 import Administrador from "../components/Administrador";
 import Estudiante from "../components/Estudiante";
+import Cursos from "../container/Cursos";
+import Carrera from "../container/Carrera";
 
 export const routes = [
     {
@@ -20,6 +22,16 @@ export const routes = [
         name: "estudiante",
         path: "/estudiante",
         component: Estudiante,
+    },
+    {
+        name: "cursos",
+        path: "/cursos/:id",
+        component: Cursos,
+    },
+    {
+        name: "carrera",
+        path: "/carrera/alumno/:id",
+        component: Carrera,
     },
 ];
 
