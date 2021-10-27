@@ -8,6 +8,7 @@ require("./bootstrap");
 import Login from "./components/Login.vue";
 import axios from "axios";
 import router from "./router";
+import store from "./store";
 
 window.Vue = require("vue").default;
 
@@ -40,6 +41,7 @@ window.Vue = require("vue").default;
 
 const app = createApp(Login);
 app.config.globalProperties.$axios = axios;
+app.use(store);
 app.use(router);
 app.mount("#app");
 

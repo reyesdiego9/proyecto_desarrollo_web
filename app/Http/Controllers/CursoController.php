@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Career;
 use DB;
+use Carbon\Carbon;
 use App\Models\Curso;
+use App\Models\RegisteredCareer;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\AssignOp\Concat;
 
@@ -28,6 +31,12 @@ class CursoController extends Controller
     public function store(Request $request)
     {
         //
+        $career = new RegisteredCareer();
+        $career->id_alumno = $request->input('id');
+        $career->id_carrera = $request->input('carrera');
+        $career->fecha_inscripcion = $request->input('fecha');
+        $career->ciclo = 2;
+        $career->save();
     }
 
     /**
@@ -43,14 +52,13 @@ class CursoController extends Controller
             ->select([
                 'students.id as id_alumno', DB::raw('CONCAT(students.nombre," ",students.apellido) as alumno'),
                 'cursos.id as id_curso', 'cursos.nombre as curso', 'primer_parcial', 'segundo_parcial', 'zona',
-                'examen_final', 'nota_final', 'course_states.descripcion', 'year', 'registered_careers.ciclo',
+                'examen_final', 'nota_final', 'course_states.descripcion', 'year', 'cursos.ciclo',
                 'careers.nombre as carrera', 'curso_indices.id as id_indice'
             ])
-            ->join('registered_careers', 'students.id', '=', 'registered_careers.id_alumno')
             ->join('curso_indices', 'students.id', '=', 'curso_indices.id_alumno')
             ->join('cursos', 'curso_indices.id_curso', '=', 'cursos.id')
             ->join('course_states', 'curso_indices.id_estado_curso', '=', 'course_states.id')
-            ->join('careers', 'registered_careers.id_carrera', '=', 'careers.id')
+            ->join('careers', 'cursos.id_carrera', '=', 'careers.id')
             ->where('students.id', '=', $id)
             ->get();
         return \response($asignatura_alumno);
@@ -63,9 +71,10 @@ class CursoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
         //
+
     }
 
     /**

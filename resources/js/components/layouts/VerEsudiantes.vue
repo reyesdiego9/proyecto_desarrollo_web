@@ -1,6 +1,7 @@
 <template>
   <div class="table-responsive py-5">
     <table
+      v-if="loader === false"
       id="example"
       class="table table-bordered table-striped table-borderless"
       style="text-align: center"
@@ -42,6 +43,9 @@
         </tr>
       </tbody>
     </table>
+    <div v-else class="spinner-border mx-auto" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
 
   <div
@@ -101,6 +105,7 @@ export default {
       datosEstudiante: [],
       estudiante: [],
       isAnAdmin: "",
+      loader: true,
     };
   },
   mounted() {
@@ -117,6 +122,7 @@ export default {
         .get("http://127.0.0.1:8000/api/estudiante")
         .then((response) => {
           this.datosEstudiante = response.data;
+          this.loader = false;
         })
         .catch((e) => {
           console.error(e);

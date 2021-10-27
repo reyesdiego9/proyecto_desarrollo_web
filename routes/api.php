@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdministradorController;
 use App\Http\Controllers\CarreraAlumnoController;
+use App\Http\Controllers\CarreraController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CourseStateController;
 use App\Http\Controllers\CursoController;
@@ -36,3 +37,4 @@ Route::apiResource('administrador', AdministradorController::class);
 Route::apiResource('asignatura/estudiante', CursoController::class);
 Route::apiResource('nota', NotaController::class);
 Route::apiResource('carrera/alumno', CarreraAlumnoController::class);
+Route::apiResource('carrera', CarreraController::class);

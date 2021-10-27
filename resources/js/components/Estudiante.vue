@@ -5,7 +5,7 @@
         <a
           @click="activate(1)"
           class="nav-link"
-          :class="{ active: this.active_el == 1 }"
+          :class="{ active: this.$store.getters.active == 1 }"
           aria-current="page"
           href="#"
           >Ingresar</a
@@ -15,7 +15,7 @@
         <a
           @click="activate(2)"
           class="nav-link"
-          :class="{ active: this.active_el == 2 }"
+          :class="{ active: this.$store.getters.active == 2 }"
           href="#"
           >Editar</a
         >
@@ -23,7 +23,7 @@
     </ul>
     <br />
     <div class="container">
-      <div v-if="this.active_el == 1">
+      <div v-if="this.$store.getters.active == 1">
         <p>pp</p>
       </div>
       <div v-else>
@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     activate(num) {
+      this.$store.commit("change", num);
       this.active_el = num;
     },
   },
