@@ -1,10 +1,10 @@
 <template>
-  <div class="table-responsive py-5">
+  <div class="table-responsive">
     <table
       v-if="loader === false"
-      id="example"
       class="table table-bordered table-striped table-borderless"
       style="text-align: center"
+      id="myTable"
     >
       <thead class="thead-dark">
         <tr>
@@ -96,6 +96,13 @@
 
 
 <script>
+//Bootstrap and jQuery libraries
+import "bootstrap/dist/css/bootstrap.min.css";
+import "jquery/dist/jquery.min.js";
+//Datatable Modules
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import $ from "jquery";
 import axios from "axios";
 
 export default {
@@ -123,6 +130,9 @@ export default {
         .then((response) => {
           this.datosEstudiante = response.data;
           this.loader = false;
+          $(document).ready(function () {
+            $("#myTable").DataTable();
+          });
         })
         .catch((e) => {
           console.error(e);

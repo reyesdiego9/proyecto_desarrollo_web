@@ -24,7 +24,7 @@
     <br />
     <div class="container">
       <div v-if="this.$store.getters.active == 1">
-        <p>pp</p>
+        <ingreso-alumno></ingreso-alumno>
       </div>
       <div v-else>
         <ver-esudiantes></ver-esudiantes>
@@ -35,8 +35,9 @@
 
 <script>
 import VerEsudiantes from "./layouts/VerEsudiantes.vue";
+import IngresoAlumno from "../container/IngresoAlumno.vue";
 export default {
-  components: { VerEsudiantes },
+  components: { VerEsudiantes, IngresoAlumno },
 
   name: "Estudiante",
   data() {
